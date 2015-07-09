@@ -1,0 +1,1583 @@
+<script>
+    //////
+    // data
+    var categories = ["Dairy", "Beverage", "Bakery Product", "Meat", "Vegetable", "Snack"];
+    var types = ["Bakery", "Kiosk", "Greengrocer", "Supermarket", "Beverage Storage"];
+    var sizes = ["Small", "Medium", "Big"];
+    var region = ["North", "East", "South", "West"];
+    var seasons = [
+        {
+            "name": "Spring",
+            "start" : new Date(1970, 02, 01),
+            "end" : new Date(1970, 04, 31)
+        },
+        {
+            "name": "Summer",
+            "start" : new Date(1970, 05, 01),
+            "end" : new Date(1970, 07, 31)
+        },
+        {
+            "name": "Autumn",
+            "start" : new Date(1970, 08, 01),
+            "end" : new Date(1970, 10, 30)
+        },
+        {
+            "name": "Winter",
+            "start" : new Date(1970, 11, 01),
+            "end" : new Date(1970, 01, 31)
+        }
+    ];
+    var date_range = {
+        "start" : new Date(2012, 00, 01),
+        "end" : new Date(2015, 04, 20)
+    };
+
+    //////
+    // customer data/json
+    var customer = {
+        "name": "",
+        "type": "",
+        "size": "",
+        "region": "",
+        "customer_ID" : null
+    };
+    // concrete customers
+    var customers = [
+        {"name":"Adelholzener Berchtesgaden","type":"Beverage Storage","size":"Small","region":"South","customer_ID":1},
+        {"name":"Allgut Kiel","type":"Kiosk","size":"Big","region":"North","customer_ID":2},
+        {"name":"Allgut Koeln ","type":"Kiosk","size":"Big","region":"West","customer_ID":3},
+        {"name":"Allgut Munich","type":"Kiosk","size":"Big","region":"South","customer_ID":4},
+        {"name":"Alsterwasser Hamburg","type":"Beverage Storage","size":"Big","region":"North","customer_ID":5},
+        {"name":"Aral Hannover","type":"Kiosk","size":"Medium","region":"North","customer_ID":6},
+        {"name":"Aral Passau","type":"Kiosk","size":"Medium","region":"South","customer_ID":7},
+        {"name":"Aral TankGut","type":"Kiosk","size":"Medium","region":"East","customer_ID":8},
+        {"name":"Be Happy Freiburg","type":"Kiosk","size":"Small","region":"South","customer_ID":9},
+        {"name":"Beer & Alk Trier","type":"Beverage Storage","size":"Medium","region":"West","customer_ID":10},
+        {"name":"Beverage Storage Nurnberg","type":"Beverage Storage","size":"Medium","region":"South","customer_ID":11},
+        {"name":"Beverages & More","type":"Beverage Storage","size":"Medium","region":"East","customer_ID":12},
+        {"name":"Beverages Schwerin","type":"Beverage Storage","size":"Medium","region":"North","customer_ID":13},
+        {"name":"Bio Greengrocer Hamburg","type":"Greengrocer","size":"Small","region":"North","customer_ID":14},
+        {"name":"Bread & Cakes","type":"Bakery","size":"Big","region":"East","customer_ID":15},
+        {"name":"Bread Rolls & More Flensburg","type":"Bakery","size":"Big","region":"North","customer_ID":16},
+        {"name":"Cigarettes & More","type":"Kiosk","size":"Small","region":"East","customer_ID":17},
+        {"name":"Drink Good Aachen","type":"Beverage Storage","size":"Small","region":"West","customer_ID":18},
+        {"name":"Eat Fresh Koblenz","type":"Greengrocer","size":"Medium","region":"West","customer_ID":19},
+        {"name":"Eat Healthy ","type":"Greengrocer","size":"Small","region":"East","customer_ID":20},
+        {"name":"Eat in Essen","type":"Kiosk","size":"Small","region":"West","customer_ID":21},
+        {"name":"Fresh Vegetables Hamburg","type":"Greengrocer","size":"Medium","region":"North","customer_ID":22},
+        {"name":"Fresh Vegetables Tuebingen","type":"Greengrocer","size":"Small","region":"South","customer_ID":23},
+        {"name":"Greengrocer Wiesbaden","type":"Greengrocer","size":"Big","region":"West","customer_ID":24},
+        {"name":"Heike's Bio Vegetables","type":"Greengrocer","size":"Medium","region":"East","customer_ID":25},
+        {"name":"Jever's Beverages ","type":"Beverage Storage","size":"Small","region":"North","customer_ID":26},
+        {"name":"Kebab Doener Essen","type":"Kiosk","size":"Medium","region":"West","customer_ID":27},
+        {"name":"Kiosk at the Corner","type":"Kiosk","size":"Small","region":"East","customer_ID":28},
+        {"name":"Mueller's Beverage Store","type":"Beverage Storage","size":"Small","region":"East","customer_ID":29},
+        {"name":"Netto Bremen","type":"Supermarket","size":"Big","region":"North","customer_ID":30},
+        {"name":"Netto Frankfurt","type":"Supermarket","size":"Big","region":"West","customer_ID":31},
+        {"name":"Netto Luebeck","type":"Supermarket","size":"Medium","region":"North","customer_ID":32},
+        {"name":"Netto Magdeburg","type":"Supermarket","size":"Small","region":"East","customer_ID":33},
+        {"name":"Netto Munich","type":"Supermarket","size":"Big","region":"South","customer_ID":34},
+        {"name":"Netto Ulm","type":"Supermarket","size":"Small","region":"South","customer_ID":35},
+        {"name":"Netto Zwickau","type":"Supermarket","size":"Medium","region":"East","customer_ID":36},
+        {"name":"Otto's Kiosk","type":"Kiosk","size":"Medium","region":"North","customer_ID":37},
+        {"name":"Penny Aachen","type":"Supermarket","size":"Medium","region":"West","customer_ID":38},
+        {"name":"Penny Erfurt","type":"Supermarket","size":"Small","region":"East","customer_ID":39},
+        {"name":"Penny Essen","type":"Supermarket","size":"Small","region":"West","customer_ID":40},
+        {"name":"Penny Schwerin","type":"Supermarket","size":"Small","region":"North","customer_ID":41},
+        {"name":"Red Bull Leipzig","type":"Beverage Storage","size":"Big","region":"East","customer_ID":42},
+        {"name":"Rewe Beverages Dortmund","type":"Beverage Storage","size":"Big","region":"West","customer_ID":43},
+        {"name":"Rewe Bielefeld","type":"Supermarket","size":"Big","region":"West","customer_ID":44},
+        {"name":"Rewe Dortmund","type":"Supermarket","size":"Big","region":"West","customer_ID":45},
+        {"name":"Rewe Dresden","type":"Supermarket","size":"Big","region":"East","customer_ID":46},
+        {"name":"Rewe Hamburg","type":"Supermarket","size":"Big","region":"North","customer_ID":47},
+        {"name":"Rewe Konstanz","type":"Supermarket","size":"Medium","region":"South","customer_ID":48},
+        {"name":"Rewe Leipzig","type":"Supermarket","size":"Big","region":"East","customer_ID":49},
+        {"name":"Rewe Nurnberg","type":"Supermarket","size":"Big","region":"South","customer_ID":50},
+        {"name":"Rewe Stuttgart","type":"Supermarket","size":"Big","region":"South","customer_ID":51},
+        {"name":"Rewe Travemuende","type":"Supermarket","size":"Medium","region":"North","customer_ID":52},
+        {"name":"Rischart Munich","type":"Bakery","size":"Big","region":"South","customer_ID":53},
+        {"name":"Schroeder's Snack Bar","type":"Kiosk","size":"Small","region":"North","customer_ID":54},
+        {"name":"Shell Augsburg","type":"Kiosk","size":"Medium","region":"South","customer_ID":55},
+        {"name":"Takeaway ","type":"Kiosk","size":"Medium","region":"West","customer_ID":56},
+        {"name":"Tom's Snack Bar","type":"Kiosk","size":"Small","region":"East","customer_ID":57},
+        {"name":"Vegetable Shop Regensburg","type":"Greengrocer","size":"Medium","region":"South","customer_ID":58},
+        {"name":"V-Markt Munich","type":"Beverage Storage","size":"Big","region":"South","customer_ID":59},
+        {"name":"Yormas Duesseldorf","type":"Bakery","size":"Big","region":"West","customer_ID":60}
+        ];
+
+    // category rules
+    var supermarket_type_classification = [
+        {
+            "type" : "Bakery",
+            "categories" : ["Dairy", "Beverage", "Bakery Product"]
+        },
+        {
+            "type" : "Kiosk",
+            "categories" : ["Beverage", "Bakery Product", "Snack"]
+        },
+        {
+            "type" : "Greengrocer",
+            "categories" : ["Vegetable"]
+        },
+        {
+            "type" : "Supermarket",
+            "categories" : ["Dairy", "Beverage", "Bakery Product", "Meat", "Vegetable", "Snack"]
+        },
+        {
+            "type" : "Beverage Storage",
+            "categories" : ["Beverage", "Snack"]
+        }
+    ];
+
+    //////
+    // product data/json
+    var products = [];
+    var product = {
+        "name": "",
+        "category": "",
+        "measuringUnit": "",
+        "probability": null,
+        "price": null,
+        "associationRules": [],
+        "seasonRules": [],
+        "product_ID" : null
+    };
+    // concrete products
+    var milk = {
+        "name" : "milk",
+        "category" : "Dairy",
+        "measuringUnit" : "l",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 150
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 300
+            },
+            {
+                "size" : "Big",
+                "quantity" : 500
+            }
+        ],
+        "price" : 0.75,
+        "associationRules" : [],
+        "seasonRules" : [
+            {
+                "name" : "Winter",
+                "probability" : 2
+            }
+        ],
+        "product_ID" : 1
+    };
+    var cheese = {
+        "name" : "cheese",
+        "category" : "Dairy",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 50
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 100
+            },
+            {
+                "size" : "Big",
+                "quantity" : 200
+            }
+        ],
+        "price" : 1.25,
+        "associationRules" : [
+            {
+                "name" : "butter",
+                "probability" : 6
+            },
+            {
+                "name" : "white bread",
+                "probability" : 7
+            },
+            {
+                "name" : "toast",
+                "probability" : 7
+            },
+            {
+                "name" : "ham",
+                "probability" : 4
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 2
+    };
+    var joghurt = {
+        "name" : "bio-joghurt",
+        "category" : "Dairy",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 150
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 200
+            },
+            {
+                "size" : "Big",
+                "quantity" : 300
+            }
+        ],
+        "price" : 0.4,
+        "associationRules" : [],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 3
+    };
+    var butter = {
+        "name" : "butter",
+        "category" : "Dairy",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 75
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 125
+            },
+            {
+                "size" : "Big",
+                "quantity" : 250
+            }
+        ],
+        "price" : 0.5,
+        "associationRules" : [
+            {
+                "name" : "white bread",
+                "probability" : 8
+            },
+            {
+                "name" : "toast",
+                "probability" : 8
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 4
+    };
+    var cream = {
+        "name" : "cream",
+        "category" : "Dairy",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 30
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 60
+            },
+            {
+                "size" : "Big",
+                "quantity" : 150
+            }
+        ],
+        "price" : 0.6,
+        "associationRules" : [],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 5
+    };
+    var ice = {
+        "name" : "ice",
+        "category" : "Dairy",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 100
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 200
+            },
+            {
+                "size" : "Big",
+                "quantity" : 400
+            }
+        ],
+        "price" : 0.7,
+        "associationRules" : [
+            {
+                "name" : "chocolate",
+                "probability" : 8
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "summer",
+                "probability" : 3
+            }
+        ],
+        "product_ID" : 6
+    };
+    var beer = {
+        "name" : "beer",
+        "category" : "Beverage",
+        "measuringUnit" : "l",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 150
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 200
+            },
+            {
+                "size" : "Big",
+                "quantity" : 250
+            }
+        ],
+        "price" : 1.75,
+        "associationRules" : [
+            {
+                "name" : "pork",
+                "probability" : 4
+            },
+            {
+                "name" : "beef",
+                "probability" : 5
+            },
+            {
+                "name" : "sausage",
+                "probability" : 6
+            },
+            {
+                "name" : "chips",
+                "probability" : 9
+            },
+            {
+                "name" : "salt sticks",
+                "probability" : 7
+            },
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 7
+    };
+    var cola = {
+        "name" : "cola",
+        "category" : "Beverage",
+        "measuringUnit" : "l",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 150
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 200
+            },
+            {
+                "size" : "Big",
+                "quantity" : 250
+            }
+        ],
+        "price" : 1.1,
+        "associationRules" : [
+            {
+                "name" : "gummi bears",
+                "probability" : 6
+            },
+            {
+                "name" : "peanuts",
+                "probability" : 5
+            },
+            {
+                "name" : "fanta",
+                "probability" : 7
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 8
+    };
+    var water = {
+        "name" : "water",
+        "category" : "Beverage",
+        "measuringUnit" : "l",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 200
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 300
+            },
+            {
+                "size" : "Big",
+                "quantity" : 400
+            }
+        ],
+        "price" : 0.5,
+        "associationRules" : [
+            {
+                "name" : "wholegrain bread",
+                "probability" : 6
+            },
+            {
+                "name" : "bio-apple-juice",
+                "probability" : 6
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 9
+    };
+    var fanta = {
+        "name" : "fanta",
+        "category" : "Beverage",
+        "measuringUnit" : "l",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 120
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 180
+            },
+            {
+                "size" : "Big",
+                "quantity" : 220
+            }
+        ],
+        "price" : 1.3,
+        "associationRules" : [
+            {
+                "name" : "cola",
+                "probability" : 8
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 10
+    };
+    var bionade = {
+        "name" : "bionade",
+        "category" : "Beverage",
+        "measuringUnit" : "l",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 100
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 150
+            },
+            {
+                "size" : "Big",
+                "quantity" : 200
+            }
+        ],
+        "price" : 1.4,
+        "associationRules" : [],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 11
+    };
+    var appleJuice = {
+        "name" : "bio-apple-juice",
+        "category" : "Beverage",
+        "measuringUnit" : "l",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 50
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 100
+            },
+            {
+                "size" : "Big",
+                "quantity" : 150
+            }
+        ],
+        "price" : 1.5,
+        "associationRules" : [
+            {
+                "name" : "water",
+                "probability" : 6
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 12
+    };
+    var roll = {
+        "name" : "roll",
+        "category" : "Bakery Product",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 15
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 45
+            },
+            {
+                "size" : "Big",
+                "quantity" : 75
+            }
+        ],
+        "price" : 2.75,
+        "associationRules" : [],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 13
+    };
+    var whiteBread = {
+        "name" : "white bread",
+        "category" : "Bakery Product",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 20
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 60
+            },
+            {
+                "size" : "Big",
+                "quantity" : 100
+            }
+        ],
+        "price" : 2,
+        "associationRules" : [
+            {
+                "name" : "butter",
+                "probability" : 4
+            },
+            {
+                "name" : "cheese",
+                "probability" : 3
+            },
+            {
+                "name" : "ham",
+                "probability" : 2
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 14
+    };
+    var toast = {
+        "name" : "toast",
+        "category" : "Bakery Product",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 12
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 36
+            },
+            {
+                "size" : "Big",
+                "quantity" : 60
+            }
+        ],
+        "price" : 2.15,
+        "associationRules" : [
+            {
+                "name" : "butter",
+                "probability" : 2
+            },
+            {
+                "name" : "cheese",
+                "probability" : 3
+            },
+            {
+                "name" : "ham",
+                "probability" : 3
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 15
+    };
+    var pretzel = {
+        "name" : "pretzel",
+        "category" : "Bakery Product",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 9
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 27
+            },
+            {
+                "size" : "Big",
+                "quantity" : 45
+            }
+        ],
+        "price" : 3.65,
+        "associationRules" : [],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 16
+    };
+    var wholegrainBread = {
+        "name" : "wholegrain bread",
+        "category" : "Bakery Product",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 15
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 45
+            },
+            {
+                "size" : "Big",
+                "quantity" : 75
+            }
+        ],
+        "price" : 2.4,
+        "associationRules" : [
+            {
+                "name" : "water",
+                "probability" : 2
+            },
+            {
+                "name" : "tomato",
+                "probability" : 5
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 17
+    };
+    var baguette = {
+        "name" : "baguette",
+        "category" : "Bakery Product",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 7
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 21
+            },
+            {
+                "size" : "Big",
+                "quantity" : 35
+            }
+        ],
+        "price" : 3.1,
+        "associationRules" : [
+            {
+                "name" : "ham",
+                "probability" : 5
+            },
+            {
+                "name" : "salad",
+                "probability" : 3
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 18
+    };
+    var pork = {
+        "name" : "pork",
+        "category" : "Meat",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 5
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 15
+            },
+            {
+                "size" : "Big",
+                "quantity" : 15
+            }
+        ],
+        "price" : 5.4,
+        "associationRules" : [
+            {
+                "name" : "beer",
+                "probability" : 4
+            },
+            {
+                "name" : "sausage",
+                "probability" : 1
+            },
+            {
+                "name" : "beef",
+                "probability" : 1
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name": "Summer",
+                "probability": 2
+            }
+        ],
+        "product_ID" : 19
+    };
+    var turkey = {
+        "name" : "turkey",
+        "category" : "Meat",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 3
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 9
+            },
+            {
+                "size" : "Big",
+                "quantity" : 15
+            }
+        ],
+        "price" : 6.85,
+        "associationRules" : [],
+        "seasonRules" : [
+            {
+                "name": "Autumn",
+                "probability": 2
+            },
+            {
+                "name": "Winter",
+                "probability": 3
+            }
+        ],
+        "product_ID" : 20
+    };
+    var beef = {
+        "name" : "beef",
+        "category" : "Meat",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 6
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 18
+            },
+            {
+                "size" : "Big",
+                "quantity" : 30
+            }
+        ],
+        "price" : 6.5,
+        "associationRules" : [
+            {
+                "name" : "beer",
+                "probability" : 3
+            },
+            {
+                "name" : "pork",
+                "probability" : 1
+            },
+            {
+                "name" : "sausage",
+                "probability" : 1
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name": "Summer",
+                "probability": 2
+            }
+        ],
+        "product_ID" : 21
+    };
+    var ham = {
+        "name" : "ham",
+        "category" : "Meat",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 8
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 24
+            },
+            {
+                "size" : "Big",
+                "quantity" : 40
+            }
+        ],
+        "price" : 4.65,
+        "associationRules" : [
+            {
+                "name" : "toast",
+                "probability" : 1
+            },
+            {
+                "name" : "cheese",
+                "probability" : 1
+            },
+            {
+                "name" : "baguette",
+                "probability" : 1
+            },
+            {
+                "name" : "salad",
+                "probability" : 1
+            },
+            {
+                "name" : "white bread",
+                "probability" : 1
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 22
+    };
+    var sausage = {
+        "name" : "sausage",
+        "category" : "Meat",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 6
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 18
+            },
+            {
+                "size" : "Big",
+                "quantity" : 30
+            }
+        ],
+        "price" : 5.3,
+        "associationRules" : [
+            {
+                "name" : "beer",
+                "probability" : 3
+            },
+            {
+                "name" : "pork",
+                "probability" : 1
+            },
+            {
+                "name" : "beef",
+                "probability" : 1
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 23
+    };
+    var tomato = {
+        "name" : "tomato",
+        "category" : "Vegetable",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 10
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 30
+            },
+            {
+                "size" : "Big",
+                "quantity" : 50
+            }
+        ],
+        "price" : 2,
+        "associationRules" : [
+            {
+                "name" : "cucumber",
+                "probability" : 2
+            },
+            {
+                "name" : "salad",
+                "probability" : 8
+            },
+            {
+                "name" : "ice",
+                "probability" : 8
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "Summer",
+                "probability" : 8
+            }
+        ],
+        "product_ID" : 24
+    };
+    var cucumber = {
+        "name" : "cucumber",
+        "category" : "Vegetable",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 100
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 300
+            },
+            {
+                "size" : "Big",
+                "quantity" : 500
+            }
+        ],
+        "price" : 0.5,
+        "associationRules" : [
+            {
+                "name" : "tomato",
+                "probability" : 2
+            },
+            {
+                "name" : "salad",
+                "probability" : 8
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 25
+    };
+    var salad = {
+        "name" : "salad",
+        "category" : "Vegetable",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 150
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 400
+            },
+            {
+                "size" : "Big",
+                "quantity" : 700
+            }
+        ],
+        "price" : 0.7,
+        "associationRules" : [
+            {
+                "name" : "tomato",
+                "probability" : 3
+            },
+            {
+                "name" : "cucumber",
+                "probability" : 3
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 26
+    };
+    var paprika = {
+        "name" : "paprika",
+        "category" : "Vegetable",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 8
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 25
+            },
+            {
+                "size" : "Big",
+                "quantity" : 43
+            }
+        ],
+        "price" : 2.5,
+        "associationRules" : [],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 27
+    };
+    var eggplant = {
+        "name" : "eggplant",
+        "category" : "Vegetable",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 5
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 15
+            },
+            {
+                "size" : "Big",
+                "quantity" : 25
+            }
+        ],
+        "price" : 3,
+        "associationRules" : [
+            {
+                "name" : "pork",
+                "probability" : 2
+            },
+            {
+                "name" : "beef",
+                "probability" : 2
+            },
+            {
+                "name" : "beer",
+                "probability" : 1
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 28
+    };
+    var chips = {
+        "name" : "chips",
+        "category" : "Snack",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 200
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 400
+            },
+            {
+                "size" : "Big",
+                "quantity" : 800
+            }
+        ],
+        "price" : 1,
+        "associationRules" : [
+            {
+                "name" : "beer",
+                "probability" : 9
+            },
+            {
+                "name" : "salt sticks",
+                "probability" : 3
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 29
+    };
+    var sticks = {
+        "name" : "salt sticks",
+        "category" : "Snack",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 100
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 300
+            },
+            {
+                "size" : "Big",
+                "quantity" : 500
+            }
+        ],
+        "price" : 0.7,
+        "associationRules" : [
+            {
+                "name" : "beer",
+                "probability" : 7
+            },
+            {
+                "name" : "chips",
+                "probability" : 3
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 30
+    };
+    var peanuts = {
+        "name" : "peanuts",
+        "category" : "Snack",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 100
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 300
+            },
+            {
+                "size" : "Big",
+                "quantity" : 500
+            }
+        ],
+        "price" : 0.8,
+        "associationRules" : [
+            {
+                "name" : "cola",
+                "probability" : 5
+            },
+            {
+                "name" : "gummi bears",
+                "probability" : 5
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 31
+    };
+    var chocolate = {
+        "name" : "chocolate",
+        "category" : "Snack",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 150
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 400
+            },
+            {
+                "size" : "Big",
+                "quantity" : 650
+            }
+        ],
+        "price" : 0.9,
+        "associationRules" : [
+            {
+                "name" : "ice",
+                "probability" : 5
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 32
+    };
+    var gummi = {
+        "name" : "gummi bears",
+        "category" : "Snack",
+        "measuringUnit" : "kg",
+        "probability" : 1,
+        "quantity" : [
+            {
+                "size" : "Small",
+                "quantity" : 150
+            },
+            {
+                "size" : "Medium",
+                "quantity" : 300
+            },
+            {
+                "size" : "Big",
+                "quantity" : 600
+            }
+        ],
+        "price" : 1.1,
+        "associationRules" : [
+            {
+                "name" : "peanuts",
+                "probability" : 2
+            },
+            {
+                "name" : "cola",
+                "probability" : 6
+            }
+        ],
+        "seasonRules" : [
+            {
+                "name" : "",
+                "probability" : ""
+            }
+        ],
+        "product_ID" : 33
+    };
+
+    // push products to array
+    products.push(milk, cheese, joghurt, butter, cream, ice, beer, cola, water, fanta, bionade, appleJuice,
+                  roll, whiteBread, toast, pretzel, wholegrainBread, baguette, pork, turkey, beef, ham, sausage,
+                  tomato, cucumber, salad, paprika, eggplant, chips, sticks, peanuts, chocolate, gummi);
+
+    //////
+    // utility functions
+    var random = function(min, max) {
+        return Math.floor(Math.random() * (max + 1 - min)) + min;
+    };
+
+    function getFoodObjectByName(name) {
+        for(var i = 0; i < products.length; i++) {
+            if(products[i].name == name){
+                return products[i];
+            }
+        }
+    }
+
+    function getEligibleCategories(type) {
+        for(var i = 0; i < supermarket_type_classification.length; i++) {
+            if(supermarket_type_classification[i].type == type){
+                return supermarket_type_classification[i].categories;
+            }
+        }
+    }
+
+    function getEligibleProducts(category) {
+        var results = [];
+        for(var i = 0; i < products.length; i++) {
+            if(products[i].category == category){
+                results.push(products[i]);
+            }
+        }
+        return results;
+    }
+
+    function convertSizeToInteger(size) {
+        var result = 0;
+        switch(size) {
+            case "Small" : result = 0; break;
+            case "Medium" : result = 1; break;
+            case "Big" : result = 2; break;
+        }
+        return result;
+    }
+
+    function count(name) {
+        var sum = 0;
+        for(var i = 0; i < salesTransactions.length; i++) {
+            if(salesTransactions[i].product == name) {
+                sum++;
+            }
+        }
+        console.log(name + " occurs " + sum + " times.");
+    }
+
+    //////
+    // salesTransactionEntry data/json
+    var salesTransactions = [];
+    var salesTransactionEntry = {
+        "day" : null,
+        "month" : null,
+        "year" : null,
+        "product" : null,
+        "product_ID" : null,
+        "quantity" : null,
+        "price" : null,
+        "customer" : null,
+        "customer_ID:" : null,
+        "season" : null,
+        "measuringUnit" : null,
+        "currency" : "EUR"
+    };
+
+    //////
+    // algorithm - calculation
+
+    // loop over our customers
+    for(var i = 0; i < customers.length; i++) {
+        // get the categories by the type of the customer (supermarket, beverage storage, kiosk, ...)
+        var eligibleCategories = getEligibleCategories(customers[i].type);
+        // loop over each of those categories
+        for(var j = 0; j < eligibleCategories.length; j++) {
+            // for each of the 1 ... 6 categories get the 4 ... 6 eligible products
+            var eligibleProducts = getEligibleProducts(eligibleCategories[j]);
+            // iterate over the date range
+            for(var date = new Date(2015, 0, 01); date < date_range.end;) {
+                // store product data temporarily in this array before pushing it to the salesTransaction array,
+                // in order to merge double product entries
+                var tmpSalestransactions = [];
+                // iterate  1 ... 4 times and choose a product of the 5 eligible products in this category each time
+                for(var l = 0; l < random(1, 4); l++) {
+                    // determine season
+                    var season = 0;
+                    var year = date.getFullYear();
+                    if(date < (seasons[0].end.setYear(year))) {
+                        season = "Spring";
+                    }
+                    else if (date < (seasons[1].end.setYear(year))) {
+                        season = "Summer";
+                    }
+                    else if (date < (seasons[2].end.setYear(year))) {
+                        season = "Autumn";
+                    }
+                    else {
+                        season = "Winter";
+                    }
+
+                    // adjust probability due to season
+                    for(var m = 0; m < eligibleProducts.length; m++) {
+                        // if there is a seasonal rule for the current season ...
+                        if(eligibleProducts[m].seasonRules[0].name == season) {
+                            // ... add it that much time to the seasonalProducts array
+                            for(var m1 = 0; m1 < eligibleProducts[m].seasonRules[0].probability; m1++) {
+                                eligibleProducts.push(eligibleProducts[m]);
+                            }
+                        }
+                    }
+
+                    // choose a product
+                    var chosenProduct = eligibleProducts[random(0, eligibleProducts.length - 1)];
+                    var salesTransactionEntry = {
+                        "customer_ID" : customers[i].customer_ID,
+                        "customer" : customers[i].name,
+                        "day" : date.getDate(),
+                        "month" : date.getMonth() + 1,
+                        "year" : date.getFullYear(),
+                        "product_ID" : chosenProduct.product_ID,
+                        "product" : chosenProduct.name,
+                        "quantity" : chosenProduct.quantity[convertSizeToInteger(customers[i].size)].quantity,
+                        "price" : chosenProduct.price * chosenProduct.quantity[convertSizeToInteger(customers[i].size)].quantity,
+                        "measuringUnit" : chosenProduct.measuringUnit,
+                        "currency" : "EUR"
+                    };
+                    // add chosenProduct to the salesTransactions
+                    tmpSalestransactions.push(salesTransactionEntry);
+
+                    // apply association rules based on the previous added product
+                    var associationRules = chosenProduct.associationRules;
+                    for (var n = 0; n < associationRules.length; n++) {
+                        if (associationRules[n].probability >= random(0, 10)) {
+                            var associationProduct = getFoodObjectByName(associationRules[n].name);
+
+                            // add chosenProduct to the salesTransactions
+                            salesTransactionEntry.product = associationProduct.name;
+                            salesTransactionEntry.quantity = associationProduct.quantity[convertSizeToInteger(customers[n].size)].quantity;
+                            salesTransactionEntry.price = associationProduct.price * salesTransactionEntry.quantity;
+                            tmpSalestransactions.push(salesTransactionEntry);
+                        }
+                    }
+                }
+
+                // end of the k for loop
+                date.setDate(date.getDate() + random(6, 10));
+
+                // beautify tmpSalesTransaction: merge double product entries
+                var tmp = [];
+                var uniqueNames = [];
+                var final = [];
+                for(var o = 0; o < tmpSalestransactions.length; o++) {
+                    tmp.push(tmpSalestransactions[o].product);
+                }
+                for(var p = 0; p < tmp.length; p++) {
+                    if(uniqueNames.indexOf(tmp[p]) === -1) {
+                        uniqueNames.push(tmp[p]);
+                        final.push(tmpSalestransactions[p]);
+                    }
+                }
+
+                // add the beautified final to the actual salesTransactions
+                salesTransactions.push.apply(salesTransactions, final);
+            }
+        }
+    }
+
+    // console.log(salesTransactions)
+    //////
+    // export
+    var data = JSON.stringify(salesTransactions);
+    var url = 'data:text/json;charset=utf8,' + encodeURIComponent(data);
+    window.open(url, '_blank');
+    window.focus();
+
+    //////
+    // tests
+
+    // test - salesTransactions
+    for(var i = 0; i < products.length; i++) {
+        count(products[i].name)
+    }
+
+    // test - seasons
+    /*for(var i = 0; i < seasons.length; i++) {
+        // console.log(seasons[i].name + " lasts from " + seasons[i].start + " to " + seasons[i].end);
+    }*/
+
+    // test - date range
+    /*var start_date = date_range.start;
+    for(var i = 0; start_date < date_range.end; i++) {
+        console.log(new Date(start_date.setDate(start_date.getDate() + random(6, 10))));
+    }*/
+</script>
