@@ -1493,7 +1493,6 @@
                     };
                     // add chosenProduct to the salesTransactions
                     tmpSalestransactions.push(salesTransactionEntry);
-
                     // apply association rules based on the previous added product
                     var associationRules = chosenProduct.associationRules;
                     for (var n = 0; n < associationRules.length; n++) {
@@ -1528,19 +1527,22 @@
             }
         }
     }
+<<<<<<< HEAD
 
     // add orderID attribute
     for(var i = 0; i < salesTransactions.length; i++) {
         salesTransactions[i].Order_ID = i + 1;
     }
 
+=======
+    // console.log(salesTransactions)
+>>>>>>> origin/master
     //////
     // export
     var data = JSON.stringify(salesTransactions);
     var url = 'data:text/json;charset=utf8,' + encodeURIComponent(data);
     window.open(url, '_blank');
     window.focus();
-
     //////
     // tests
     // test - salesTransactions
@@ -1556,4 +1558,8 @@
      for(var i = 0; start_date < date_range.end; i++) {
      console.log(new Date(start_date.setDate(start_date.getDate() + random(6, 10))));
      }*/
+<<<<<<< HEAD
 </script>
+=======
+</script>
+>>>>>>> origin/master
