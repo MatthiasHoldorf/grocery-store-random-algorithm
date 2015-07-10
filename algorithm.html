@@ -24,14 +24,13 @@
         {
             "name": "Winter",
             "start" : new Date(1970, 11, 01),
-            "end" : new Date(1970, 01, 31)
+            "end" : new Date(1970, 01, 28)
         }
     ];
     var date_range = {
         "start" : new Date(2012, 00, 01),
         "end" : new Date(2015, 04, 20)
     };
-
     //////
     // customer data/json
     var customer = {
@@ -43,7 +42,7 @@
     };
     // concrete customers
     var customers = [
-        {"name":"Adelholzener Berchtesgaden","type":"Beverage Storage","size":"Small","region":"South","customer_ID":1},
+        {"name":"Adelholzener Berchtesgaden","type":"Greengrocer","size":"Small","region":"South","customer_ID":1},
         {"name":"Allgut Kiel","type":"Kiosk","size":"Big","region":"North","customer_ID":2},
         {"name":"Allgut Koeln ","type":"Kiosk","size":"Big","region":"West","customer_ID":3},
         {"name":"Allgut Munich","type":"Kiosk","size":"Big","region":"South","customer_ID":4},
@@ -103,8 +102,7 @@
         {"name":"Vegetable Shop Regensburg","type":"Greengrocer","size":"Medium","region":"South","customer_ID":58},
         {"name":"V-Markt Munich","type":"Beverage Storage","size":"Big","region":"South","customer_ID":59},
         {"name":"Yormas Duesseldorf","type":"Bakery","size":"Big","region":"West","customer_ID":60}
-        ];
-
+    ];
     // category rules
     var supermarket_type_classification = [
         {
@@ -128,7 +126,6 @@
             "categories" : ["Beverage", "Snack"]
         }
     ];
-
     //////
     // product data/json
     var products = [];
@@ -317,7 +314,7 @@
     var ice = {
         "name" : "ice",
         "category" : "Dairy",
-        "measuringUnit" : "kg",
+        "measuringUnit" : "l",
         "probability" : 1,
         "quantity" : [
             {
@@ -417,7 +414,7 @@
                 "quantity" : 250
             }
         ],
-        "price" : 1.1,
+        "price" : 1,
         "associationRules" : [
             {
                 "name" : "gummi bears",
@@ -665,7 +662,7 @@
                 "quantity" : 60
             }
         ],
-        "price" : 2.15,
+        "price" : 2,
         "associationRules" : [
             {
                 "name" : "butter",
@@ -774,7 +771,7 @@
                 "quantity" : 35
             }
         ],
-        "price" : 3.1,
+        "price" : 3,
         "associationRules" : [
             {
                 "name" : "ham",
@@ -1101,7 +1098,7 @@
                 "quantity" : 700
             }
         ],
-        "price" : 0.7,
+        "price" : 0.8,
         "associationRules" : [
             {
                 "name" : "tomato",
@@ -1377,18 +1374,15 @@
         ],
         "product_ID" : 33
     };
-
     // push products to array
     products.push(milk, cheese, joghurt, butter, cream, ice, beer, cola, water, fanta, bionade, appleJuice,
-                  roll, whiteBread, toast, pretzel, wholegrainBread, baguette, pork, turkey, beef, ham, sausage,
-                  tomato, cucumber, salad, paprika, eggplant, chips, sticks, peanuts, chocolate, gummi);
-
+            roll, whiteBread, toast, pretzel, wholegrainBread, baguette, pork, turkey, beef, ham, sausage,
+            tomato, cucumber, salad, paprika, eggplant, chips, sticks, peanuts, chocolate, gummi);
     //////
     // utility functions
     var random = function(min, max) {
         return Math.floor(Math.random() * (max + 1 - min)) + min;
     };
-
     function getFoodObjectByName(name) {
         for(var i = 0; i < products.length; i++) {
             if(products[i].name == name){
@@ -1396,7 +1390,6 @@
             }
         }
     }
-
     function getEligibleCategories(type) {
         for(var i = 0; i < supermarket_type_classification.length; i++) {
             if(supermarket_type_classification[i].type == type){
@@ -1404,7 +1397,6 @@
             }
         }
     }
-
     function getEligibleProducts(category) {
         var results = [];
         for(var i = 0; i < products.length; i++) {
@@ -1414,7 +1406,6 @@
         }
         return results;
     }
-
     function convertSizeToInteger(size) {
         var result = 0;
         switch(size) {
@@ -1424,7 +1415,6 @@
         }
         return result;
     }
-
     function count(name) {
         var sum = 0;
         for(var i = 0; i < salesTransactions.length; i++) {
@@ -1434,28 +1424,20 @@
         }
         console.log(name + " occurs " + sum + " times.");
     }
-
     //////
     // salesTransactionEntry data/json
     var salesTransactions = [];
     var salesTransactionEntry = {
-        "day" : null,
-        "month" : null,
-        "year" : null,
-        "product" : null,
-        "product_ID" : null,
-        "quantity" : null,
-        "price" : null,
-        "customer" : null,
-        "customer_ID:" : null,
-        "season" : null,
-        "measuringUnit" : null,
-        "currency" : "EUR"
+        "Order_ID" : null,
+        "Customer_ID:" : null,
+        "Product_ID" : null,
+        "Day" : null,
+        "Month" : null,
+        "Year" : null,
+        "Quantity" : null,
     };
-
     //////
     // algorithm - calculation
-
     // loop over our customers
     for(var i = 0; i < customers.length; i++) {
         // get the categories by the type of the customer (supermarket, beverage storage, kiosk, ...)
@@ -1465,7 +1447,7 @@
             // for each of the 1 ... 6 categories get the 4 ... 6 eligible products
             var eligibleProducts = getEligibleProducts(eligibleCategories[j]);
             // iterate over the date range
-            for(var date = new Date(2015, 0, 01); date < date_range.end;) {
+            for(var date = new Date(2012, 00, 01); date < new Date(2015, 11, 21);) {
                 // store product data temporarily in this array before pushing it to the salesTransaction array,
                 // in order to merge double product entries
                 var tmpSalestransactions = [];
@@ -1487,31 +1469,27 @@
                         season = "Winter";
                     }
 
-                    // adjust probability due to season
+                    // take seasons into account
+                    var seasonalAdjustedEligibleProducts = eligibleProducts;
                     for(var m = 0; m < eligibleProducts.length; m++) {
-                        // if there is a seasonal rule for the current season ...
+                        // if there is a seasonal rule ...
                         if(eligibleProducts[m].seasonRules[0].name == season) {
                             // ... add it that much time to the seasonalProducts array
-                            for(var m1 = 0; m1 < eligibleProducts[m].seasonRules[0].probability; m1++) {
-                                eligibleProducts.push(eligibleProducts[m]);
+                            for(var m1; m < eligibleProducts[m].seasonRules[0].probability; m++) {
+                                seasonalAdjustedEligibleProducts.push(eligibleProducts[m]);
                             }
                         }
                     }
 
-                    // choose a product
-                    var chosenProduct = eligibleProducts[random(0, eligibleProducts.length - 1)];
+                    var chosenProduct = seasonalAdjustedEligibleProducts[random(0, seasonalAdjustedEligibleProducts.length - 1)];
                     var salesTransactionEntry = {
-                        "customer_ID" : customers[i].customer_ID,
-                        "customer" : customers[i].name,
-                        "day" : date.getDate(),
-                        "month" : date.getMonth() + 1,
-                        "year" : date.getFullYear(),
-                        "product_ID" : chosenProduct.product_ID,
-                        "product" : chosenProduct.name,
-                        "quantity" : chosenProduct.quantity[convertSizeToInteger(customers[i].size)].quantity,
-                        "price" : chosenProduct.price * chosenProduct.quantity[convertSizeToInteger(customers[i].size)].quantity,
-                        "measuringUnit" : chosenProduct.measuringUnit,
-                        "currency" : "EUR"
+                        "Customer_ID" : customers[i].customer_ID,
+                        "Product_ID" : chosenProduct.product_ID,
+                        "Day" : date.getDate(),
+                        "Month" : date.getMonth() + 1,
+                        "Year" : date.getFullYear(),
+                        "Season" : season,
+                        "Quantity" : chosenProduct.quantity[convertSizeToInteger(customers[i].size)].quantity,
                     };
                     // add chosenProduct to the salesTransactions
                     tmpSalestransactions.push(salesTransactionEntry);
@@ -1521,16 +1499,13 @@
                     for (var n = 0; n < associationRules.length; n++) {
                         if (associationRules[n].probability >= random(0, 10)) {
                             var associationProduct = getFoodObjectByName(associationRules[n].name);
-
                             // add chosenProduct to the salesTransactions
-                            salesTransactionEntry.product = associationProduct.name;
-                            salesTransactionEntry.quantity = associationProduct.quantity[convertSizeToInteger(customers[n].size)].quantity;
-                            salesTransactionEntry.price = associationProduct.price * salesTransactionEntry.quantity;
+                            salesTransactionEntry.Product_ID = associationProduct.product_ID;
+                            salesTransactionEntry.Quantity = associationProduct.quantity[convertSizeToInteger(customers[i].size)].quantity;
                             tmpSalestransactions.push(salesTransactionEntry);
                         }
                     }
                 }
-
                 // end of the k for loop
                 date.setDate(date.getDate() + random(6, 10));
 
@@ -1554,7 +1529,11 @@
         }
     }
 
-    // console.log(salesTransactions)
+    // add orderID attribute
+    for(var i = 0; i < salesTransactions.length; i++) {
+        salesTransactions[i].Order_ID = i + 1;
+    }
+
     //////
     // export
     var data = JSON.stringify(salesTransactions);
@@ -1564,20 +1543,17 @@
 
     //////
     // tests
-
     // test - salesTransactions
     for(var i = 0; i < products.length; i++) {
         count(products[i].name)
     }
-
     // test - seasons
     /*for(var i = 0; i < seasons.length; i++) {
-        // console.log(seasons[i].name + " lasts from " + seasons[i].start + " to " + seasons[i].end);
-    }*/
-
+     // console.log(seasons[i].name + " lasts from " + seasons[i].start + " to " + seasons[i].end);
+     }*/
     // test - date range
     /*var start_date = date_range.start;
-    for(var i = 0; start_date < date_range.end; i++) {
-        console.log(new Date(start_date.setDate(start_date.getDate() + random(6, 10))));
-    }*/
+     for(var i = 0; start_date < date_range.end; i++) {
+     console.log(new Date(start_date.setDate(start_date.getDate() + random(6, 10))));
+     }*/
 </script>
