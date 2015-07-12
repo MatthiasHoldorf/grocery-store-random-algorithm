@@ -115,7 +115,7 @@
         },
         {
             "type" : "Greengrocer",
-            "categories" : ["Vegetable"]
+            "categories" : ["Dairy"] // "categories" : ["Vegetable"]
         },
         {
             "type" : "Supermarket",
@@ -160,8 +160,14 @@
             }
         ],
         "price" : 0.75,
-        "associationRules" : [],
+        "associationRules" : [
+            {
+                "name" : "bio-joghurt",
+                "probability" : 60
+            },
+        ],
         "seasonRules" : [],
+        "product_ID" : 1
     };
     var cheese = {
         "name" : "cheese",
@@ -171,15 +177,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 150
+                "quantity" : 50
             },
             {
                 "size" : "Medium",
-                "quantity" : 200
+                "quantity" : 85
             },
             {
                 "size" : "Big",
-                "quantity" : 250
+                "quantity" : 150
             }
         ],
         "price" : 1.25,
@@ -229,11 +235,12 @@
             }
         ],
         "price" : 0.4,
-        "associationRules" : [],
+        "associationRules" : [
+        ],
         "seasonRules" : [
             {
-                "name" : "",
-                "probability" : ""
+                "name" : "Winter",
+                "probability" : 50
             }
         ],
         "product_ID" : 3
@@ -347,15 +354,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 89
+                "quantity" : 30
             },
             {
                 "size" : "Medium",
-                "quantity" : 111
+                "quantity" : 50
             },
             {
                 "size" : "Big",
-                "quantity" : 156
+                "quantity" : 80
             }
         ],
         "price" : 1.75,
@@ -373,18 +380,14 @@
                 "probability" : 60
             },
             {
-                "name" : "chips",
-                "probability" : 90
-            },
-            {
                 "name" : "salt sticks",
-                "probability" : 70
+                "probability" : 50
             },
         ],
         "seasonRules" : [
             {
-                "name" : "",
-                "probability" : ""
+                "name" : "Summer",
+                "probability" : 60
             }
         ],
         "product_ID" : 7
@@ -397,15 +400,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 111
+                "quantity" : 76
             },
             {
                 "size" : "Medium",
-                "quantity" : 123
+                "quantity" : 100
             },
             {
                 "size" : "Big",
-                "quantity" : 197
+                "quantity" : 120
             }
         ],
         "price" : 1,
@@ -416,7 +419,7 @@
             },
             {
                 "name" : "fanta",
-                "probability" : 70
+                "probability" : 30
             }
         ],
         "seasonRules" : [
@@ -435,28 +438,28 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 200
+                "quantity" : 50
             },
             {
                 "size" : "Medium",
-                "quantity" : 250
+                "quantity" : 125
             },
             {
                 "size" : "Big",
-                "quantity" : 375
+                "quantity" : 170
             }
         ],
         "price" : 0.5,
         "associationRules" : [
             {
                 "name" : "bio-apple-juice",
-                "probability" : 60
+                "probability" : 40
             }
         ],
         "seasonRules" : [
             {
                 "name" : "Summer",
-                "probability" : 30
+                "probability" : 50
             }
         ],
         "product_ID" : 9
@@ -469,22 +472,22 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 120
+                "quantity" : 45
             },
             {
                 "size" : "Medium",
-                "quantity" : 180
+                "quantity" : 64
             },
             {
                 "size" : "Big",
-                "quantity" : 220
+                "quantity" : 80
             }
         ],
         "price" : 1.3,
         "associationRules" : [
             {
                 "name" : "cola",
-                "probability" : 70
+                "probability" : 40
             }
         ],
         "seasonRules" : [
@@ -503,15 +506,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 100
+                "quantity" : 35
             },
             {
                 "size" : "Medium",
-                "quantity" : 150
+                "quantity" : 64
             },
             {
                 "size" : "Big",
-                "quantity" : 200
+                "quantity" : 77
             }
         ],
         "price" : 1.4,
@@ -519,7 +522,7 @@
         "seasonRules" : [
             {
                 "name" : "Summer",
-                "probability" : 10
+                "probability" : 50
             }
         ],
         "product_ID" : 11
@@ -532,15 +535,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 50
+                "quantity" : 12
             },
             {
                 "size" : "Medium",
-                "quantity" : 100
+                "quantity" : 33
             },
             {
                 "size" : "Big",
-                "quantity" : 150
+                "quantity" : 44
             }
         ],
         "price" : 1.5,
@@ -552,8 +555,8 @@
         ],
         "seasonRules" : [
             {
-                "name" : "",
-                "probability" : ""
+                "name" : "Summer",
+                "probability" : 40
             }
         ],
         "product_ID" : 12
@@ -566,15 +569,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 89
+                "quantity" : 20
             },
             {
                 "size" : "Medium",
-                "quantity" : 123
+                "quantity" : 35
             },
             {
                 "size" : "Big",
-                "quantity" : 196
+                "quantity" : 50
             }
         ],
         "price" : 2.75,
@@ -595,15 +598,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 80
+                "quantity" : 20
             },
             {
                 "size" : "Medium",
-                "quantity" : 120
+                "quantity" : 35
             },
             {
                 "size" : "Big",
-                "quantity" : 175
+                "quantity" : 50
             }
         ],
         "price" : 2,
@@ -637,15 +640,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 89
+                "quantity" : 35
             },
             {
                 "size" : "Medium",
-                "quantity" : 123
+                "quantity" : 50
             },
             {
                 "size" : "Big",
-                "quantity" : 182
+                "quantity" : 75
             }
         ],
         "price" : 2,
@@ -679,15 +682,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 85
+                "quantity" : 20
             },
             {
                 "size" : "Medium",
-                "quantity" : 125
+                "quantity" : 35
             },
             {
                 "size" : "Big",
-                "quantity" : 165
+                "quantity" : 50
             }
         ],
         "price" : 3.65,
@@ -708,15 +711,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 50
+                "quantity" : 20
             },
             {
                 "size" : "Medium",
-                "quantity" : 150
+                "quantity" : 35
             },
             {
                 "size" : "Big",
-                "quantity" : 200
+                "quantity" : 50
             }
         ],
         "price" : 2.4,
@@ -746,15 +749,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 89
+                "quantity" : 20
             },
             {
                 "size" : "Medium",
-                "quantity" : 145
+                "quantity" : 35
             },
             {
                 "size" : "Big",
-                "quantity" : 185
+                "quantity" : 50
             }
         ],
         "price" : 3,
@@ -784,15 +787,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 125
+                "quantity" : 50
             },
             {
                 "size" : "Medium",
-                "quantity" : 144
+                "quantity" : 75
             },
             {
                 "size" : "Big",
-                "quantity" : 179
+                "quantity" : 80
             }
         ],
         "price" : 5.4,
@@ -826,15 +829,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 95
+                "quantity" : 15
             },
             {
                 "size" : "Medium",
-                "quantity" : 111
+                "quantity" : 25
             },
             {
                 "size" : "Big",
-                "quantity" : 140
+                "quantity" : 40
             }
         ],
         "price" : 6.85,
@@ -842,7 +845,7 @@
         "seasonRules" : [
             {
                 "name": "Autumn",
-                "probability": 30
+                "probability": 40
             }
         ],
         "product_ID" : 20
@@ -855,15 +858,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 94
+                "quantity" : 25
             },
             {
                 "size" : "Medium",
-                "quantity" : 142
+                "quantity" : 50
             },
             {
                 "size" : "Big",
-                "quantity" : 194
+                "quantity" : 80
             }
         ],
         "price" : 6.5,
@@ -883,8 +886,8 @@
         ],
         "seasonRules" : [
             {
-                "name": "Summer",
-                "probability": 10
+                "name" : "Summer",
+                "probability" : 40
             }
         ],
         "product_ID" : 21
@@ -901,19 +904,19 @@
             },
             {
                 "size" : "Medium",
-                "quantity" : 97
+                "quantity" : 55
             },
             {
                 "size" : "Big",
-                "quantity" : 140
+                "quantity" : 77
             }
         ],
         "price" : 4.65,
         "associationRules" : [],
         "seasonRules" : [
             {
-                "name" : "",
-                "probability" : ""
+                "name" : "Summer",
+                "probability" : 40
             }
         ],
         "product_ID" : 22
@@ -926,15 +929,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 96
+                "quantity" : 30
             },
             {
                 "size" : "Medium",
-                "quantity" : 125
+                "quantity" : 76
             },
             {
                 "size" : "Big",
-                "quantity" : 186
+                "quantity" : 80
             }
         ],
         "price" : 5.3,
@@ -955,7 +958,7 @@
         "seasonRules" : [
             {
                 "name" : "Summer",
-                "probability" : 10
+                "probability" : 40
             }
         ],
         "product_ID" : 23
@@ -968,15 +971,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 10
+                "quantity" : 45
             },
             {
                 "size" : "Medium",
-                "quantity" : 30
+                "quantity" : 65
             },
             {
                 "size" : "Big",
-                "quantity" : 50
+                "quantity" : 90
             }
         ],
         "price" : 2,
@@ -993,7 +996,7 @@
         "seasonRules" : [
             {
                 "name" : "Summer",
-                "probability" : 20
+                "probability" : 50
             }
         ],
         "product_ID" : 24
@@ -1010,11 +1013,11 @@
             },
             {
                 "size" : "Medium",
-                "quantity" : 300
+                "quantity" : 150
             },
             {
                 "size" : "Big",
-                "quantity" : 500
+                "quantity" : 300
             }
         ],
         "price" : 0.5,
@@ -1030,8 +1033,8 @@
         ],
         "seasonRules" : [
             {
-                "name" : "",
-                "probability" : ""
+                "name" : "Summer",
+                "probability" : 15
             }
         ],
         "product_ID" : 25
@@ -1068,8 +1071,8 @@
         ],
         "seasonRules" : [
             {
-                "name" : "",
-                "probability" : ""
+                "name" : "Summer",
+                "probability" : 15
             }
         ],
         "product_ID" : 26
@@ -1082,23 +1085,23 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 89
+                "quantity" : 56
             },
             {
                 "size" : "Medium",
-                "quantity" : 174
+                "quantity" : 76
             },
             {
                 "size" : "Big",
-                "quantity" : 254
+                "quantity" : 89
             }
         ],
         "price" : 2.5,
         "associationRules" : [],
         "seasonRules" : [
             {
-                "name" : "",
-                "probability" : ""
+                "name" : "Summer",
+                "probability" : 15
             }
         ],
         "product_ID" : 27
@@ -1111,15 +1114,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 124
+                "quantity" : 53
             },
             {
                 "size" : "Medium",
-                "quantity" : 189
+                "quantity" : 64
             },
             {
                 "size" : "Big",
-                "quantity" : 254
+                "quantity" : 89
             }
         ],
         "price" : 3,
@@ -1139,8 +1142,8 @@
         ],
         "seasonRules" : [
             {
-                "name" : "",
-                "probability" : ""
+                "name" : "Summer",
+                "probability" : 15
             }
         ],
         "product_ID" : 28
@@ -1153,15 +1156,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 150
+                "quantity" : 50
             },
             {
                 "size" : "Medium",
-                "quantity" : 200
+                "quantity" : 100
             },
             {
                 "size" : "Big",
-                "quantity" : 400
+                "quantity" : 125
             }
         ],
         "price" : 1,
@@ -1187,15 +1190,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 100
+                "quantity" : 50
             },
             {
                 "size" : "Medium",
-                "quantity" : 142
+                "quantity" : 100
             },
             {
                 "size" : "Big",
-                "quantity" : 245
+                "quantity" : 125
             }
         ],
         "price" : 0.7,
@@ -1221,15 +1224,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 100
+                "quantity" : 50
             },
             {
                 "size" : "Medium",
-                "quantity" : 300
+                "quantity" : 100
             },
             {
                 "size" : "Big",
-                "quantity" : 500
+                "quantity" : 125
             }
         ],
         "price" : 0.8,
@@ -1259,15 +1262,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 150
+                "quantity" : 50
             },
             {
                 "size" : "Medium",
-                "quantity" : 250
+                "quantity" : 100
             },
             {
                 "size" : "Big",
-                "quantity" : 350
+                "quantity" : 125
             }
         ],
         "price" : 0.9,
@@ -1279,9 +1282,13 @@
         ],
         "seasonRules" : [
             {
-                "name" : "",
-                "probability" : ""
-            }
+                "name" : "Winter",
+                "probability" : 30
+            },
+            {
+                "name" : "Spring",
+                "probability" : 30
+            },
         ],
         "product_ID" : 32
     };
@@ -1293,15 +1300,15 @@
         "quantity" : [
             {
                 "size" : "Small",
-                "quantity" : 125
+                "quantity" : 50
             },
             {
                 "size" : "Medium",
-                "quantity" : 175
+                "quantity" : 100
             },
             {
                 "size" : "Big",
-                "quantity" : 250
+                "quantity" : 125
             }
         ],
         "price" : 1.1,
@@ -1391,7 +1398,7 @@
             // for each of the 1 ... 6 categories get the 4 ... 6 eligible products
             var eligibleProducts = getEligibleProducts(eligibleCategories[j]);
             // iterate over the date range
-            for(var date = new Date(2012, 00, 01); date < new Date(2015, 11, 31);) {
+            for(var date = new Date(2012, 01, 01); date < new Date(2015, 11, 31);) {
                 // store product data temporarily in this array before pushing it to the salesTransaction array,
                 // in order to merge double product entries
                 var tmpSalestransactions = [];
@@ -1433,7 +1440,10 @@
                             // if there is a seasonal rule ...
                             if(eligibleProducts[m].seasonRules[m1].name == season) {
                                 if (eligibleProducts[m].seasonRules[m1].probability >= random(0, 100)) {
-                                    // add chosenProduct to the salesTransactions
+                                    if(eligibleProducts[m].product_ID === 3) {
+                                        // test += eligibleProducts[m].quantity[convertSizeToInteger(customers[i].size)].quantity;
+                                    }
+                                    // add seasonProduct to the salesTransactions
                                     salesTransactionEntry.Product_ID = eligibleProducts[m].product_ID;
                                     salesTransactionEntry.Quantity = eligibleProducts[m].quantity[convertSizeToInteger(customers[i].size)].quantity;
                                     tmpSalestransactions.push(salesTransactionEntry);
@@ -1449,9 +1459,12 @@
                         // only allow association if the product is eligible for the customer
                         if (eligibleProducts.indexOf(associationProduct) != -1) {
                             if (associationRules[n].probability >= random(0, 100)) {
-                                // add chosenProduct to the salesTransactions
-                                salesTransactionEntry.Product_ID = associationProduct.product_ID;
-                                salesTransactionEntry.Quantity = associationProduct.quantity[convertSizeToInteger(customers[i].size)].quantity;
+                                if(associationProduct.product_ID === 3) {
+                                    // test += associationProduct.quantity[convertSizeToInteger(customers[i].size)].quantity;
+                                }
+                                // add associationProduct to the salesTransactions
+                                salesTransactionEntry.Product_ID = associationProduct.product_ID,
+                                salesTransactionEntry.Quantity = associationProduct.quantity[convertSizeToInteger(customers[i].size)].quantity
                                 tmpSalestransactions.push(salesTransactionEntry);
                             }
                         }
@@ -1462,20 +1475,23 @@
 
                 // beautify tmpSalesTransaction: merge double product entries
                 var tmp = [];
-                var uniqueNames = [];
+                var uniqueProducts = [];
                 var final = [];
                 for(var o = 0; o < tmpSalestransactions.length; o++) {
-                    tmp.push(tmpSalestransactions[o].product);
+                    tmp.push(tmpSalestransactions[o].Product_ID);
                 }
                 for(var p = 0; p < tmp.length; p++) {
-                    if(uniqueNames.indexOf(tmp[p]) === -1) {
-                        uniqueNames.push(tmp[p]);
+                    if(uniqueProducts.indexOf(tmp[p]) === -1) {
+                        uniqueProducts.push(tmp[p]);
                         final.push(tmpSalestransactions[p]);
+                    }
+                    else {
+                        final[uniqueProducts.indexOf(tmp[p])].Quantity += tmpSalestransactions[p].Quantity;
                     }
                 }
 
                 // add the beautified final to the actual salesTransactions
-                salesTransactions.push.apply(salesTransactions, final);
+                salesTransactions.push.apply(salesTransactions, tmpSalestransactions);
             }
         }
     }
@@ -1517,10 +1533,11 @@
 
     //////
     // export data to json
-    /*var data = JSON.stringify(salesTransactions);
+    var data = JSON.stringify(salesTransactions);
     var url = 'data:text/json;charset=utf8,' + encodeURIComponent(data);
     window.open(url, '_blank');
-    window.focus();*/
+    window.focus();
+
     function count(id, name) {
         var sum = 0;
         var quantity = 0;
