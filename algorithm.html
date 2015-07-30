@@ -1477,13 +1477,6 @@
                     // add chosenProduct to the salesTransactions
                     tmpSalestransactions.push(salesTransactionEntry);
 
-                    /*if(customers[i].type == "Beverage Storage") {
-                        console.log(eligibleProducts)
-                        console.log(customers[i].name)
-                        console.log(date)
-                        console.log("chosen Product:" + salesTransactionEntry.Product_ID);
-                    }*/
-
                     // apply season rules based on season
                     for(var m = 0; m < eligibleProducts.length; m++) {
                         for(var m1 = 0; m1 < eligibleProducts[m].seasonRules.length; m1++) {
